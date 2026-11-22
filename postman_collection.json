@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "Inventory Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "productId",
+      "value": "PASTE_PRODUCT_ID_HERE"
+    }
+  ],
+  "item": [
+    {
+      "name": "API Welcome",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/"
+      }
+    },
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Laptop\",\n  \"category\": \"Electronics\",\n  \"price\": 45000,\n  \"quantity\": 10,\n  \"sku\": \"LAP101\",\n  \"description\": \"Dell laptop\",\n  \"lowStockThreshold\": 5\n}"
+        },
+        "url": "{{baseUrl}}/api/products"
+      }
+    },
+    {
+      "name": "Get All Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products?page=1&limit=10"
+      }
+    },
+    {
+      "name": "Filter and Sort Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products?category=Electronics&sort=price&order=asc&page=1&limit=5"
+      }
+    },
+    {
+      "name": "Get Product by ID",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/{{productId}}"
+      }
+    },
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 42000\n}"
+        },
+        "url": "{{baseUrl}}/api/products/{{productId}}"
+      }
+    },
+    {
+      "name": "Restock Product",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 5\n}"
+        },
+        "url": "{{baseUrl}}/api/products/{{productId}}/restock"
+      }
+    },
+    {
+      "name": "Record Sale",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 2\n}"
+        },
+        "url": "{{baseUrl}}/api/products/{{productId}}/sale"
+      }
+    },
+    {
+      "name": "Low Stock Report",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/reports/low-stock"
+      }
+    },
+    {
+      "name": "Category Summary",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/reports/category-summary"
+      }
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/products/{{productId}}"
+      }
+    }
+  ]
+}
